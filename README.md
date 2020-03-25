@@ -1,4 +1,4 @@
-# Vik
+# C++
 
 You will be building a linked list. Make sure to keep track of both the head and tail nodes.
 
