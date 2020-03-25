@@ -1,1 +1,140 @@
+main.cpp
 
+#include <iostream>
+#include "ContactNode.h"
+using namespace std;
+
+
+int main() {
+    ContactNode* person1 = nullptr;
+    ContactNode* person2 = nullptr;
+    ContactNode* person3 = nullptr;
+    
+    
+    string name;
+    string phoneNum;
+    
+        cout << "Person 1" << endl;
+        cout << "Enter name:"<< endl;
+        getline(cin, name);
+        cout << "Enter phone number:"<< endl;
+        getline(cin, phoneNum);
+        cout << "You entered: " << name << ", " << phoneNum << endl << endl;
+        
+        person1 = new ContactNode(name, phoneNum);
+        
+        cout << "Person 2" << endl;
+        cout << "Enter name:"<< endl;
+        getline(cin, name);
+        cout << "Enter phone number:"<< endl;
+        getline(cin, phoneNum);
+        cout << "You entered: " << name << ", " << phoneNum << endl << endl;
+        
+        person2 = new ContactNode(name, phoneNum);
+        
+        cout << "Person 3" << endl;
+        cout << "Enter name:"<< endl;
+        getline(cin, name);
+        cout << "Enter phone number:"<< endl;
+        getline(cin, phoneNum);
+        cout << "You entered: " << name << ", " << phoneNum << endl << endl;
+        
+        person3 = new ContactNode(name, phoneNum);
+        
+        person1->InsertAfter(person2);
+        person2->InsertAfter(person3);
+        
+        cout << "CONTACT LIST" << endl;
+        
+        while (person1 != nullptr) {
+            person1->PrintContactNode();
+            person1 = person1->GetNext();
+        }
+        
+return 0;
+}
+
+
+ContactNode.cpp
+
+#include <iostream>
+#include "ContactNode.h"
+using namespace std;
+
+ContactNode::ContactNode() {
+    nextNodePtr = nullptr;
+}
+
+ContactNode::ContactNode(string name, string phoneNum) {
+    contactName = name;
+    contactPhoneNum = phoneNum;
+    nextNodePtr = nullptr;
+}
+
+void ContactNode::InsertAfter(ContactNode* nextNode) {
+    ContactNode* temp = nullptr;
+    temp = nextNodePtr;
+    nextNodePtr = nextNode;
+    nextNode->nextNodePtr = temp;
+    
+}
+
+ContactNode* ContactNode::GetNext() {
+    return nextNodePtr;
+}
+
+string ContactNode::GetName() {
+    return contactName;
+
+}
+string ContactNode::GetPhoneNumber() {
+    return contactPhoneNum;
+    
+}
+
+void ContactNode::PrintContactNode() {
+    cout << "Name: " << contactName << endl;
+    cout << "Phone number: " << contactPhoneNum << endl << endl;
+}
+
+
+
+ContactNode.h
+
+#ifndef Contact_H
+#define Contact_H
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+class ContactNode {
+   
+   public:
+   
+      ContactNode();
+      ContactNode(string name, string phone);
+
+      void InsertAfter(ContactNode*);
+
+      string GetName();
+
+      string GetPhoneNumber();
+
+      ContactNode* GetNext();
+
+      void PrintContactNode();
+      
+   private:
+   
+      string contactName;
+
+      string contactPhoneNum;
+
+      ContactNode* nextNodePtr;
+
+   };
+
+   #endif
+      
